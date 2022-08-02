@@ -1,0 +1,34 @@
+schema-version: 1.0
+
+type: builder
+
+description: |
+  The Libcap package implements the user-space interfaces to the POSIX 1003.1e capabilities available in Linux kernels. These capabilities are a partitioning of the all powerful root privilege into a set of distinct privileges.
+
+  Installed programs: capsh, getcap, getpcaps, and setcap
+  Installed library: libcap.so and libpsx.so
+  Short Descriptions
+    capsh: A shell wrapper to explore and constrain capability support
+    getcap: Examines file capabilities
+    getpcaps: Displays the capabilities on the queried process(es)
+    setcap: Sets file capabilities
+    libcap: Contains the library functions for manipulating POSIX 1003.1e capabilities
+    libpsx: Contains functions to support POSIX semantics for syscalls associated with the pthread library
+
+in:
+  version: 2.63
+
+provision:
+  - url:
+      from: https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-{% version %}.tar.xz
+      todir: "{% xbeeSrc %}"
+
+build:
+  - shell:
+      cmds:
+        - sed -i '/install -m.*STA/d' libcap/Makefile
+        - make prefix=/usr lib=lib
+        - make prefix=/usr lib=lib install DESTDIR={% xbeeOut %}
+      directory: "{% xbeeSrc %}/libcap-{% version %}"
+
+
