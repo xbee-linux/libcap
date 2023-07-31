@@ -15,20 +15,20 @@ description: |
     libcap: Contains the library functions for manipulating POSIX 1003.1e capabilities
     libpsx: Contains functions to support POSIX semantics for syscalls associated with the pthread library
 
-in:
+var:
   version: 2.63
 
 provision:
   - url:
-      from: https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-{% version %}.tar.xz
-      todir: "{% xbeeSrc %}"
+      from: https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-{{ .version }}.tar.xz
+      todir: "{{ .xbee.src }}"
 
 build:
   - shell:
       cmds:
         - sed -i '/install -m.*STA/d' libcap/Makefile
         - make prefix=/usr lib=lib
-        - make prefix=/usr lib=lib install DESTDIR={% xbeeOut %}
-      directory: "{% xbeeSrc %}/libcap-{% version %}"
+        - make prefix=/usr lib=lib install DESTDIR={{ .xbee.out }}
+      directory: "{{ .xbee.src }}/libcap-{{ .version }}"
 
 
