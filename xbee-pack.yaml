@@ -16,7 +16,8 @@ description: |
     libpsx: Contains functions to support POSIX semantics for syscalls associated with the pthread library
 
 var:
-  version: 2.63
+  xbee:
+    version: 2.63
 
 provision:
   url: https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-{{ .version }}.tar.xz
