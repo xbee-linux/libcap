@@ -20,7 +20,7 @@ var:
     version: 2.63
 
 provision:
-  url: https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-{{ .version }}.tar.xz
+  url: https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-{{ .xbee.version }}.tar.xz
 
 build:
   - shell:
@@ -28,6 +28,6 @@ build:
         - sed -i '/install -m.*STA/d' libcap/Makefile
         - make prefix=/usr lib=lib
         - make prefix=/usr lib=lib install DESTDIR={{ .xbee.out }}
-      directory: "{{ .xbee.src }}/libcap-{{ .version }}"
+      directory: "{{ .xbee.src }}/libcap-{{ .xbee.version }}"
 
 
